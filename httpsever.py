@@ -29,12 +29,12 @@ class HTTPServer(object):
             client_socket, client_address = self.server_socket.accept()
             print("[%s, %s]用户连接上了" % client_address)
             handle_client_process = Thread(
-                target=self.handle_client, args=(client_socket,))
+                target=self.handle_client, args=(client_socket,client_address))
             handle_client_process.start()
             #client_socket.close()
             print(self.spider_status)
 
-    def handle_client(self, client_socket,):
+    def handle_client(self, client_socket,client_address):
         """
         处理客户端请求
         """
@@ -67,13 +67,10 @@ class HTTPServer(object):
                                         'spider': self.spider_status,
                                         },indent=4)
         elif len(file_name) >= 5 and file_name[:5] == '/post':
-            #print(request_lines[-1].decode('utf-8'))
             self.set_status(json.loads(request_lines[-1].decode('utf-8')))
-            #print(self.spider_status)
             response_body = 'received!'
 
             response_start_line = "HTTP/1.1 200 OK\r\n"
-            #response_headers = "Server: BiliSpider server\r\n"
         elif len(file_name) >= 5 and file_name[:5] == '/exit':
             response_body = 'received exit command!'
             self.exit_mes = True
