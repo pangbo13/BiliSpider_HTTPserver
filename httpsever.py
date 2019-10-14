@@ -8,12 +8,14 @@ import socket
 import re
 import psutil
 import json
+import os
 
 from threading import Thread
 
+
 # 设置静态文件根目录
 HTML_ROOT_DIR = "./html"
-
+os.chdir(os.path.dirname(__file__))
 
 class HTTPServer(object):
     def __init__(self):
@@ -22,6 +24,15 @@ class HTTPServer(object):
             socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.spider_status = {}
         self.exit_mes = False
+        self.content_type ={
+            "css":r"text/css",
+            "html":r"text/html",
+            "htm":r"text/html",
+            "js":r"application/x-javascript",
+            "ico":r"image/x-icon",
+            "png":r"image/png",
+            "jpg":r"image/jpeg"
+        }
 
     def start(self):
         self.server_socket.listen(128)
@@ -32,7 +43,7 @@ class HTTPServer(object):
                 target=self.handle_client, args=(client_socket,client_address))
             handle_client_process.start()
             #client_socket.close()
-            print(self.spider_status)
+            #print(self.spider_status)
 
     def handle_client(self, client_socket,client_address):
         """
@@ -40,7 +51,6 @@ class HTTPServer(object):
         """
         # 获取客户端请求数据
         request_data = client_socket.recv(1024)
-        #print("request data:", request_data.decode('utf-8'))
         request_lines = request_data.splitlines()
         if len(request_lines) > 0:
             # 解析请求报文
@@ -89,6 +99,8 @@ class HTTPServer(object):
                 file_data = file.read()
                 file.close()
                 # 构造响应数据
+                response_headers += "Content-Type: " + self.content_type.get(file_name.rsplit('.',1)[1],r"application/octet-stream") + "\r\n"
+                #print(self.content_type.get(file_name.rsplit('.',1)[1],r"application/octet-stream"))
                 response_start_line = "HTTP/1.1 200 OK\r\n"
                 #response_headers = "Server: BiliSpider server\r\n"
                 response_body = file_data
@@ -96,9 +108,9 @@ class HTTPServer(object):
         if isinstance(response_body,bytes):
             pass
         elif isinstance(response_body,str):
-            response_body = response_body.encode('utf_8')
+            response_body = response_body.encode('utf-8')
         else:
-            response_body = str(response_body).encode('utf_8')
+            response_body = str(response_body).encode('utf-8')
 
         response = bytes(response_start_line + response_headers + "\r\n" , 'utf-8')+ response_body
         #print("response data:\n", response)

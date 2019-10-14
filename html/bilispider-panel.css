@@ -1,0 +1,89 @@
+*{
+	margin: 0;
+}
+
+.non-display{
+	display: none !important;
+}
+
+.bar {
+	height: 20px;
+	width: 80%;
+	border-radius: 5px;
+	border: 0.5px solid #cccccc;
+	background: #dddddd;
+	margin: 15px auto 0 auto;
+}
+
+.val {
+	height: 20px;
+	width: 0px;
+	border-radius: 5px;
+	background: repeating-linear-gradient(45deg, #99ccff 0px, #99ccff 15px, #0099cc 15px, #0099cc 30px);
+	background-size: 42px 20px;
+	animation: progress-striped 1s linear 0s infinite normal both;
+}
+
+#head-div{
+	margin: 0;
+	position: sticky;
+	top: 0; 
+	background-color: #abd4e7;
+	z-index: 10;
+	padding-top: 10px;
+	height: 70px;
+	border-radius: 0 0 10px 10px;
+	
+}
+
+.inline-div {
+	display: flex;
+	margin: auto;
+}
+
+.inline-div .chart {
+	margin: auto;
+	display: inline-block;
+	width: 400px;
+	height:300px;
+}
+
+#error-div{
+	height: 300px;
+	width: 100%;
+	border-radius: 20px;
+	background-color: red;
+}
+
+@keyframes progress-striped {
+	from {
+		background-position: 0px 0px
+	}
+
+	to {
+		background-position: 42px 0px
+	}
+}
+@media screen and (max-width:1200px){
+	.inline-div{
+		display: block;
+		width: 100%;
+	}
+	.inline-div .chart{
+		width: 80%;
+		height: auto;
+		margin: 0 10%;
+	}
+}
+
+.alert {
+	padding: 8px 35px 8px 14px;
+	margin-bottom: 20px;
+	color: #c09853;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	background-color: #fcf8e3;
+	border: 1px solid #fbeed5;
+	-webkit-border-radius: 4px;
+	   -moz-border-radius: 4px;
+			border-radius: 4px;
+  }
