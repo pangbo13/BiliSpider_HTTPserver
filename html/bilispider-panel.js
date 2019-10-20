@@ -1,8 +1,11 @@
 function requestData() {
 	$.ajax({
-		url: 'http://192.168.0.114:1214/data',
+		url: 'http://' + bilispider_host + '/data',
 		success: function (data) {
-			$(".chart").removeClass("non-display")
+			// $("#chart-div").removeClass("non-display")
+			$("#chart-div").fadeIn();
+			$("#connect-info").addClass("non-display");
+			$("#connect-error").addClass("non-display");
 
 			var shift = cpu_chart.series[0].data.length > 60; // 当数据点数量超过 20 个，则指定删除第一个点
 
@@ -35,7 +38,10 @@ function requestData() {
 			});
 			
 			if (!$.isEmptyObject(data.spider)) {
-				$(".spider_chart").removeClass("non-display")
+				// $(".spider_chart").removeClass("non-display")
+				$("#inline-div").show();
+				$(".spider_chart").fadeIn();
+				$("#nospider-warning").fadeOut();
 				var threaddata = [];
 				for (var i = 0; i < data.spider.pages_get_by_threads.length; i++) {
 					threaddata.push(["线程" + (i+1), data.spider.pages_get_by_threads[i]])
@@ -48,14 +54,19 @@ function requestData() {
 				speed_chart.series[0].setData([speed]);
 			}
 			else{
-				$(".spider_chart").addClass("non-display");
+				// $(".spider_chart").addClass("non-display");
+				$(".spider_chart").hide();
+				$("#inline-div").hide();
+				$("#nospider-warning").fadeIn();
 			}
 			// 一秒后继续调用本函数
 			setTimeout(requestData, 1000);
 		},
 		error: function () {
-			$(".chart").addClass("non-display");
-			$("#show-error").removeClass("non-display");
+			$("#connect-info").addClass("non-display")
+			// $("#chart-div").addClass("non-display");
+			$("#chart-div").fadeOut()
+			$("#connect-error").removeClass("non-display");
 			setTimeout(requestData, 2000);
 		},
 		cache: false
@@ -68,6 +79,11 @@ $(document).ready(function () {
 	// 		data: []
 	// 	}
 	// };
+	Highcharts.setOptions({
+		global: {
+			useUTC: false
+		}
+	});
 
 	cpu_chart = Highcharts.chart('cpu_chart', {
 		chart: {

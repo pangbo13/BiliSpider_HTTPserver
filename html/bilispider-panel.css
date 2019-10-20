@@ -3,6 +3,10 @@
 }
 
 .non-display{
+	display: none;
+}
+
+.imp-non-display{
 	display: none !important;
 }
 
@@ -28,7 +32,7 @@
 	margin: 0;
 	position: sticky;
 	top: 0; 
-	background-color: #abd4e7;
+	background-color: #D9EDF7;
 	z-index: 10;
 	padding-top: 10px;
 	height: 70px;
@@ -36,24 +40,18 @@
 	
 }
 
-.inline-div {
+#inline-div {
 	display: flex;
 	margin: auto;
 }
 
-.inline-div .chart {
+#inline-div .chart {
 	margin: auto;
 	display: inline-block;
 	width: 400px;
 	height:300px;
 }
 
-#error-div{
-	height: 300px;
-	width: 100%;
-	border-radius: 20px;
-	background-color: red;
-}
 
 @keyframes progress-striped {
 	from {
@@ -65,25 +63,21 @@
 	}
 }
 @media screen and (max-width:1200px){
-	.inline-div{
+	#inline-div{
 		display: block;
 		width: 100%;
 	}
-	.inline-div .chart{
+	#inline-div .chart{
 		width: 80%;
 		height: auto;
 		margin: 0 10%;
 	}
 }
 
-.alert {
-	padding: 8px 35px 8px 14px;
-	margin-bottom: 20px;
-	color: #c09853;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-	background-color: #fcf8e3;
-	border: 1px solid #fbeed5;
-	-webkit-border-radius: 4px;
-	   -moz-border-radius: 4px;
-			border-radius: 4px;
-  }
+.alert{
+	margin: 5% 20%;
+}
+
+#set-url{
+	margin: 10px auto;
+}

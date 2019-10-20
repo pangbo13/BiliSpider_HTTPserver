@@ -7,39 +7,67 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>BILI SPIDER</title>
 	<link rel="shortcut icon" href="/favicon.ico" />
+	<link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" href="bilispider-panel.css">
+	<link rel="stylesheet" href="loadingcss.css">
 </head>
 
 <body>
 	<div id="head-div">
-		<div id="progress-bar" class="bar">
-			<div id="progress-val" class="val"></div>
+	</div>
+
+	<div id="alert-div">
+		<div class="alert alert-info" id="connect-info">
+			<div class="wrapp">
+				<div class="k-ball-holder3">
+					<div class="k-ball7a"></div>
+					<div class="k-ball7b"></div>
+					<div class="k-ball7c"></div>
+					<div class="k-ball7d"></div>
+				</div>
+			</div>
+			<p class="alert-link">正在连接</a>
+		</div>
+		<div class="alert alert-warning non-display" id="nospider-warning">
+			<p class="alert-link">爬虫未启动！</a>
+		</div>
+		<div class="alert alert-danger non-display" id="connect-error">
+			<p class="alert-link">错误！连接失败！</p>
+			<form role="form">
+				<p>手动设置服务器url：</p>
+				<input type="text" class="form-control" id="url-input" />
+				<!-- <button type="submit" class="btn btn-default">确认</button> -->
+				<button type="button" class="btn btn-secondary" id="set-url">确定</button>
+			</form>
 		</div>
 	</div>
 
-	<div id="show-error" class="non-display">
-	 <div id="error-div">
-			
-	 </div>
-	</div>
+	<div id="chart-div" class="non-display">
 
-	<div class="inline-div" style="margin:auto">
-		<div id="thread_chart" class="chart spider_chart"></div>
-		<div id="speed_chart" class="chart spider_chart"></div>
-		<div id="queue_chart" class="chart spider_chart"></div>
+		<div id="progress-bar" class="bar spider_chart">
+			<div id="progress-val" class="val"></div>
+		</div>
+
+		<div id="inline-div" style="display: none;">
+			<div id="thread_chart" class="chart spider_chart"></div>
+			<div id="speed_chart" class="chart spider_chart"></div>
+			<div id="queue_chart" class="chart spider_chart"></div>
+		</div>
+
+		<div id="cpu_chart" class="chart sys_chart" style="width: auto;height:400px;"></div>
+		<div id="mem_chart" class="chart sys_chart" style="width: auto;height:400px;"></div>
 	</div>
-	
-	<div id="cpu_chart" class="chart sys_chart" style="width: auto;height:400px;"></div>
-	<div id="mem_chart" class="chart sys_chart" style="width: auto;height:400px;"></div>
 </body>
-<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="http://cdn.highcharts.com.cn/highcharts/highcharts.js"></script>
 <script src="https://code.highcharts.com.cn/highcharts/highcharts-more.js"></script>
 <script src="https://code.highcharts.com.cn/highcharts/modules/solid-gauge.js"></script>
+<script src="bilispider-page.js"></script>
 <script src="bilispider-panel.js"></script>
 <script>
-
-
+	//  alert(url)
 </script>
 
 </html>
